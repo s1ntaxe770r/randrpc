@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: randrpc-server
+spec:
+  selector:
+    matchLabels:
+      app: randrpc-server
+  template:
+    metadata:
+      labels:
+        app: randrpc-server
+    spec:
+      containers:
+      - name: randrpc-server
+        image: ghcr.io/s1ntaxe770r/randrpc-server:v1 
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 7070 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: randrpc-server
+spec:
+  selector:
+    app: randrpc-server
+  ports:
+  - port: 7070
+    targetPort: 7070
+
+

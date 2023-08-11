@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: randrpc-client 
+  namespace: test
+spec:
+  selector:
+    matchLabels:
+      app: randrpc-client 
+  template:
+    metadata:
+      labels:
+        app: randrpc-client 
+    spec:
+      containers:
+      - name: randrpc-client 
+        image: ghcr.io/s1ntaxe770r/randrpc-client:v1
+        env:
+        - name: SERVER_ADDR
+          value: "randrpc-server.default.svc.cluster.local:7070"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
