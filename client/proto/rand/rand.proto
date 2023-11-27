@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "github.com/s1ntaxe770r/randrpc/proto/rand";
+
+service RandService {
+  rpc Rand(RandRequest) returns (RandResponse) {}
+}
+
+message RandRequest {
+  int32 min = 1;
+  int32 max = 2;
+}
+
+message RandResponse { int32 rand = 1; }
+
+// generate a sever using protoc --go_out=plugins=grpc:. randrpc.proto

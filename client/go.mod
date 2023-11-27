@@ -1,6 +1,6 @@
 module github.com/s1ntaxe770r/randrpc/client
 
-replace github.com/s1ntaxe770r/randrpc/proto => ../proto
+replace github.com/s1ntaxe770r/randrpc/proto => ./proto
 
 go 1.20
 

@@ -1,26 +1,17 @@
-FROM golang:alpine as builder
+FROM golang:1.18-alpine as builder
 
 WORKDIR /app
-COPY ./go.mod .
+
+COPY server/go.mod .
+COPY proto . 
 RUN go mod download
-RUN apk add --no-cache gcc musl-dev
+RUN apk add --no-cache gcc musl-dev build-base
+
 COPY . .
 
-COPY ../proto/  .
-
-RUN old_string="replace github.com/s1ntaxe770r/randrpc/proto => ../proto" 
-RUN new_string="replace github.com/s1ntaxe770r/randrpc/proto => ./proto"
-
-
-RUN sed -i "s|$old_string|$new_string|g"
-
-
-
-RUN CGO_ENABLED=1 GOOS=linux  go build -o api
+RUN  go build -o api 
 
 FROM alpine
-
-RUN apk add --no-cache ca-certificates
 
 COPY --from=builder /app/api /api
 
