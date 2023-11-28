@@ -35,7 +35,7 @@ func NewRandServiceClient(cc grpc.ClientConnInterface) RandServiceClient {
 
 func (c *randServiceClient) Rand(ctx context.Context, in *RandRequest, opts ...grpc.CallOption) (*RandResponse, error) {
 	out := new(RandResponse)
-	err := c.cc.Invoke(ctx, "/RandService/Rand", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/randrpc.RandService/Rand", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _RandService_Rand_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/RandService/Rand",
+		FullMethod: "/randrpc.RandService/Rand",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RandServiceServer).Rand(ctx, req.(*RandRequest))
@@ -92,7 +92,7 @@ func _RandService_Rand_Handler(srv interface{}, ctx context.Context, dec func(in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RandService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "RandService",
+	ServiceName: "randrpc.RandService",
 	HandlerType: (*RandServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

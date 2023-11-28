@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package  randrpc;
+
 option go_package = "github.com/s1ntaxe770r/randrpc/proto/rand";
 
 service RandService {
